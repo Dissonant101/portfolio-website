@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 const Home = () => {
-  return <p>This is the home page.</p>;
+  return (
+    <div className="p-5">
+      <p>This is the home page.</p>
+    </div>
+  );
 };
 
 export default Home;
