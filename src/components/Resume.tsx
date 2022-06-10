@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MyDocument from "./MyDocument";
 
 const Resume = () => {
   return (
@@ -15,6 +16,7 @@ const Resume = () => {
         <button>
             Generate Resume
         </button>
+        <MyDocument />
     </div>
   );
 };
