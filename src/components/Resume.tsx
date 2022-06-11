@@ -42,15 +42,16 @@ const Resume = () => {
 
   return (
     <div className="flex">
-      <div className="flex-1">
+      <div className="flex-1 p-5">
+        Resume Builder
         <form>
-          <input type="text" name="firstName" value={formState.firstName} placeholder="First Name" onChange={handleChange}></input>
+          <input className="outline outline-1 my-1 px-5 py-1" type="text" name="firstName" value={formState.firstName} placeholder="First Name" onChange={handleChange}></input>
           <br />
-          <input type="text" name="lastName" value={formState.lastName} placeholder="Last Name" onChange={handleChange}></input>
+          <input className="outline outline-1 my-1 px-5 py-1" type="text" name="lastName" value={formState.lastName} placeholder="Last Name" onChange={handleChange}></input>
           <br />
-          <input type="email" name="email" value={formState.email} placeholder="Email" onChange={handleChange}></input>
+          <input className="outline outline-1 my-1 px-5 py-1" type="email" name="email" value={formState.email} placeholder="Email" onChange={handleChange}></input>
           <br />
-          <input type="text" name="phoneNumber" value={formState.phoneNumber} placeholder="Phone Number" onChange={handleChange}></input>
+          <input className="outline outline-1 my-1 px-5 py-1" type="text" name="phoneNumber" value={formState.phoneNumber} placeholder="Phone Number" onChange={handleChange}></input>
         </form>
       </div>
       <div className="flex-1 min-h-screen">

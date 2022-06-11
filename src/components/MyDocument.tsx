@@ -29,8 +29,9 @@ const MyDocument = ({ firstName, lastName, email, phoneNumber }: FormData) => {
             <Document>
                 <Page size="A4" style={styles.page}>
                     <View style={styles.section}>
-                        <Text>{firstName} {lastName}</Text>
-                        <Text>{email} {phoneNumber}</Text>
+                        <Text>Name: {firstName} {lastName}</Text>
+                        <Text>Email: {email}</Text>
+                        <Text>Phone Number: {phoneNumber}</Text>
                     </View>
                 </Page>
             </Document>
