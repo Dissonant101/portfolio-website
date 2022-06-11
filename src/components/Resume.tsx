@@ -25,9 +25,9 @@ const Resume = () => {
     phoneNumber: ""
   });
 
-  const debouncer = useCallback(_debounce((event: React.ChangeEvent<HTMLInputElement>) => {
+  const debouncer = useCallback(_debounce((event: React.ChangeEvent<HTMLInputElement>, formData: FormData) => {
     setDocumentState({
-      ...formState,
+      ...formData,
       [event.target.name]: event.target.value
     });
   }, 500), []);
@@ -37,7 +37,7 @@ const Resume = () => {
       ...formState,
       [event.target.name]: event.target.value
     });
-    debouncer(event);
+    debouncer(event, formState);
   }
 
   return (
