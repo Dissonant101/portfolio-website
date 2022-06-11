@@ -1,4 +1,7 @@
 import { Document, Page, Text, View, StyleSheet, PDFViewer } from "@react-pdf/renderer";
+import { useEffect } from "react";
+import { UseFormReturn } from "react-hook-form";
+import { FormData } from "./Resume";
 
 const styles = StyleSheet.create({
     page: {
@@ -9,19 +12,25 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
         flexGrow: 1
+    },
+    viewer: {
+        width: "100%",
+        height: "100%"
     }
 });
 
-const MyDocument= () => {
+const MyDocument = ({ firstName, lastName, email, phoneNumber }: FormData) => {
+    useEffect(() => {
+        console.log(firstName);
+    })
+
     return (
-        <PDFViewer>
+        <PDFViewer style={styles.viewer}>
             <Document>
                 <Page size="A4" style={styles.page}>
                     <View style={styles.section}>
-                        <Text>Section #1</Text>
-                    </View>
-                    <View style={styles.section}>
-                        <Text>Section #2</Text>
+                        <Text>{firstName} {lastName}</Text>
+                        <Text>{email} {phoneNumber}</Text>
                     </View>
                 </Page>
             </Document>
