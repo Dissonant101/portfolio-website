@@ -6,12 +6,14 @@ import { FormData } from "./Resume";
 const styles = StyleSheet.create({
     page: {
         flexDirection: "row",
-        backgroundColor: "#E4E4E4"
+        backgroundColor: "#E4E4E4",
+        padding: 50
     },
     section: {
         margin: 10,
         padding: 10,
-        flexGrow: 1
+        flexGrow: 1,
+        flexWrap: "wrap"
     },
     viewer: {
         width: "100%",
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const MyDocument = ({ firstName, lastName, email, phoneNumber }: FormData) => {
+const MyDocument = ({ firstName, lastName, email, phoneNumber, experience }: FormData) => {
     useEffect(() => {
         console.log(firstName);
     })
@@ -32,6 +34,8 @@ const MyDocument = ({ firstName, lastName, email, phoneNumber }: FormData) => {
                         <Text>Name: {firstName} {lastName}</Text>
                         <Text>Email: {email}</Text>
                         <Text>Phone Number: {phoneNumber}</Text>
+                        <Text>Experience:</Text>
+                        <Text>{experience}</Text>
                     </View>
                 </Page>
             </Document>
