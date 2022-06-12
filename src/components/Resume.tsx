@@ -8,6 +8,7 @@ export interface FormData {
   lastName: string;
   email: string;
   phoneNumber: string;
+  summary: string;
   experience: string;
 }
 
@@ -17,6 +18,7 @@ const Resume = () => {
     lastName: '',
     email: '',
     phoneNumber: '',
+    summary: '',
     experience: '',
   });
 
@@ -25,6 +27,7 @@ const Resume = () => {
     lastName: '',
     email: '',
     phoneNumber: '',
+    summary: '',
     experience: '',
   });
 
@@ -109,6 +112,18 @@ const Resume = () => {
                 ></input>
               </div>
             </div>
+          </div>
+          <div className="outline rounded-md p-3 mb-5">
+            <label>Summary</label>
+            <br />
+            <textarea
+              className="outline outline-1 rounded-md my-1 px-3 py-1"
+              rows={4}
+              cols={90}
+              name="summary"
+              value={formState.summary}
+              onChange={handleChange}
+            ></textarea>
           </div>
           <div className="outline rounded-md p-3 mb-5">
             <label>Experience</label>

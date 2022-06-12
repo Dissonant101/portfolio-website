@@ -32,9 +32,13 @@ const styles = StyleSheet.create({
     color: 'black',
     width: '100%',
     margin: 10,
-    padding: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    flexDirection: 'row',
     flexGrow: 1,
     flexWrap: 'wrap',
+    borderBottom: 2,
+    borderBottomColor: 'orange',
   },
   icon: {
     width: 20,
@@ -48,6 +52,7 @@ const MyDocument = ({
   lastName,
   email,
   phoneNumber,
+  summary,
   experience,
 }: FormData) => {
   useEffect(() => {
@@ -72,12 +77,20 @@ const MyDocument = ({
             </View>
           </View>
           <View style={styles.bodySection}>
-            <View
-              style={{ fontSize: 24, textAlign: 'center', borderBottom: 1 }}
-            >
+            <View style={{ flex: 1, fontSize: 24 }}>
+              <Text>Professional Summary</Text>
+            </View>
+            <View style={{ flex: 3 }}>
+              <Text style={{ padding: 6 }}>{summary}</Text>
+            </View>
+          </View>
+          <View style={styles.bodySection}>
+            <View style={{ flex: 1, fontSize: 24 }}>
               <Text>Experience</Text>
             </View>
-            <Text>{experience}</Text>
+            <View style={{ flex: 3 }}>
+              <Text style={{ padding: 6 }}>{experience}</Text>
+            </View>
           </View>
         </Page>
       </Document>
