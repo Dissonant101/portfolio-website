@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "dynamicresumes",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-amplify1afdfc14c60d4-staging-05635-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/98757a6c2d8f5317a1fec830fdfc022d87f51ee0"
+}
