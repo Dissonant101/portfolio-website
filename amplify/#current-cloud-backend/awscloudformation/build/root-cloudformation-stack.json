@@ -110,6 +110,53 @@
       "UpdateReplacePolicy": "Retain",
       "DeletionPolicy": "Retain"
     },
+    "DeploymentBucketBlockHTTP": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "DeploymentBucketName"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "DeploymentBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "DeploymentBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
     "AuthRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -152,15 +199,15 @@
         }
       }
     },
-    "authportfoliowebsitec8f6430d": {
+    "authportfoliowebsite965f2e51": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/auth/portfoliowebsitec8f6430d-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/auth/portfoliowebsite965f2e51-cloudformation-template.json",
         "Parameters": {
-          "identityPoolName": "portfoliowebsitec8f6430d_identitypool_c8f6430d",
+          "identityPoolName": "portfoliowebsite965f2e51_identitypool_965f2e51",
           "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "portfoc8f6430d",
-          "userPoolName": "portfoliowebsitec8f6430d_userpool_c8f6430d",
+          "resourceNameTruncated": "portfo965f2e51",
+          "userPoolName": "portfoliowebsite965f2e51_userpool_965f2e51",
           "autoVerifiedAttributes": "email",
           "mfaConfiguration": "OFF",
           "mfaTypes": "SMS Text Message",
@@ -177,10 +224,10 @@
           "userpoolClientRefreshTokenValidity": 30,
           "userpoolClientWriteAttributes": "email",
           "userpoolClientReadAttributes": "email",
-          "userpoolClientLambdaRole": "portfoc8f6430d_userpoolclient_lambda_role",
+          "userpoolClientLambdaRole": "portfo965f2e51_userpoolclient_lambda_role",
           "userpoolClientSetAttributes": false,
-          "sharedId": "c8f6430d",
-          "resourceName": "portfoliowebsitec8f6430d",
+          "sharedId": "965f2e51",
+          "resourceName": "portfoliowebsite965f2e51",
           "authSelections": "identityPoolAndUserPool",
           "useDefault": "default",
           "userPoolGroupList": "",
@@ -256,7 +303,7 @@
       "DependsOn": [
         "AuthRole",
         "UnauthRole",
-        "authportfoliowebsitec8f6430d"
+        "authportfoliowebsite965f2e51"
       ],
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -351,7 +398,7 @@
         },
         "idpId": {
           "Fn::GetAtt": [
-            "authportfoliowebsitec8f6430d",
+            "authportfoliowebsite965f2e51",
             "Outputs.IdentityPoolId"
           ]
         },

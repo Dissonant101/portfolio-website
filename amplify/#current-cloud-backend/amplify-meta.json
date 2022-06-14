@@ -13,7 +13,7 @@
     }
   },
   "auth": {
-    "portfoliowebsitec8f6430d": {
+    "portfoliowebsite965f2e51": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -37,20 +37,20 @@
         ]
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/auth/portfoliowebsitec8f6430d-cloudformation-template.json",
-        "logicalId": "authportfoliowebsitec8f6430d"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/auth/portfoliowebsite965f2e51-cloudformation-template.json",
+        "logicalId": "authportfoliowebsite965f2e51"
       },
-      "lastPushTimeStamp": "2022-06-13T03:21:19.278Z",
+      "lastPushTimeStamp": "2022-06-14T15:03:26.305Z",
       "output": {
-        "UserPoolId": "us-east-2_OwmQq3dwv",
-        "AppClientIDWeb": "6qrlqqj769bmkgm2tpmjolmivm",
-        "AppClientID": "7n87389p8l4i7kss10l6qh1t2f",
-        "IdentityPoolId": "us-east-2:0ff427a7-ec91-4d9a-91bd-145c1a036247",
-        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:480847995643:userpool/us-east-2_OwmQq3dwv",
-        "IdentityPoolName": "portfoliowebsitec8f6430d_identitypool_c8f6430d__staging",
-        "UserPoolName": "portfoliowebsitec8f6430d_userpool_c8f6430d"
+        "UserPoolId": "us-east-2_K3Dw55OjO",
+        "AppClientIDWeb": "6fvos5qud1vhsvi2njlb76heer",
+        "AppClientID": "7587qd4lksolaunv55m32ofocb",
+        "IdentityPoolId": "us-east-2:270be10f-5b76-409c-b31c-47d257fff534",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:480847995643:userpool/us-east-2_K3Dw55OjO",
+        "IdentityPoolName": "portfoliowebsite965f2e51_identitypool_965f2e51__staging",
+        "UserPoolName": "portfoliowebsite965f2e51_userpool_965f2e51"
       },
-      "lastPushDirHash": "q1SNQ4trKxsrkq5jQKCBah8p2Po="
+      "lastPushDirHash": "fnic5OFoVW6+sdEHHE3jAeW+ixI="
     }
   },
   "api": {
@@ -74,7 +74,7 @@
         "GraphQLAPIEndpointOutput": "https://ipz6gtx33ba4jiwejj4kklvenu.appsync-api.us-east-2.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-25yonimjsbg6fptta33re5lm3e"
       },
-      "lastPushTimeStamp": "2022-06-13T03:21:18.983Z",
+      "lastPushTimeStamp": "2022-06-14T15:03:25.909Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apidynamicresumes"
@@ -90,11 +90,12 @@
         "BucketName": "dynamicresumes05635-staging",
         "Region": "us-east-2"
       },
-      "lastPushTimeStamp": "2022-06-13T03:21:18.997Z",
+      "lastPushTimeStamp": "2022-06-14T15:03:25.943Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify1afdfc14c60d4-staging-05635-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageresumes"
-      }
+      },
+      "lastPushDirHash": "b+wiou8in3y2quqPefrfSsezLws="
     }
   }
 }

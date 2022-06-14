@@ -1,6 +1,6 @@
 {
   "auth": {
-    "portfoliowebsitec8f6430d": {
+    "portfoliowebsite965f2e51": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

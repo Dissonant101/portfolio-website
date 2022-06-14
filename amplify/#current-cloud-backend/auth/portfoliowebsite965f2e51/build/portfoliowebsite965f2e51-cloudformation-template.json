@@ -1,5 +1,5 @@
 {
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.4.0\",\"stackType\":\"auth-Cognito\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.5.0\",\"stackType\":\"auth-Cognito\",\"metadata\":{}}",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "env": {
@@ -193,7 +193,7 @@
         "UserPoolId": {
           "Ref": "UserPool"
         },
-        "ClientName": "portfoc8f6430d_app_clientWeb",
+        "ClientName": "portfo965f2e51_app_clientWeb",
         "RefreshTokenValidity": {
           "Ref": "userpoolClientRefreshTokenValidity"
         }
@@ -208,7 +208,7 @@
         "UserPoolId": {
           "Ref": "UserPool"
         },
-        "ClientName": "portfoc8f6430d_app_client",
+        "ClientName": "portfo965f2e51_app_client",
         "GenerateSecret": {
           "Ref": "userpoolClientGenerateSecret"
         },
@@ -245,7 +245,7 @@
               "Fn::Join": [
                 "",
                 [
-                  "upClientLambdaRolec8f6430d",
+                  "upClientLambdaRole965f2e51",
                   {
                     "Fn::Select": [
                       3,
@@ -313,7 +313,7 @@
             }
           ]
         },
-        "PolicyName": "portfoc8f6430d_userpoolclient_lambda_iam_policy",
+        "PolicyName": "portfo965f2e51_userpoolclient_lambda_iam_policy",
         "Roles": [
           {
             "Ref": "UserPoolClientRole"
@@ -356,7 +356,7 @@
             }
           ]
         },
-        "PolicyName": "portfoc8f6430d_userpoolclient_lambda_log_policy",
+        "PolicyName": "portfo965f2e51_userpoolclient_lambda_log_policy",
         "Roles": [
           {
             "Ref": "UserPoolClientRole"
@@ -436,12 +436,12 @@
         "IdentityPoolName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "portfoliowebsitec8f6430d_identitypool_c8f6430d",
+            "portfoliowebsite965f2e51_identitypool_965f2e51",
             {
               "Fn::Join": [
                 "",
                 [
-                  "portfoliowebsitec8f6430d_identitypool_c8f6430d__",
+                  "portfoliowebsite965f2e51_identitypool_965f2e51__",
                   {
                     "Ref": "env"
                   }
