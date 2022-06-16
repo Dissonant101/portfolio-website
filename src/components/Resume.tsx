@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
-import { useForm, SubmitHandler } from 'react-hook-form';
 
 export interface FormData {
   firstName: string;

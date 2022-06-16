@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const About = () => {
   return (
     <div className="p-5">

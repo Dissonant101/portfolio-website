@@ -7,9 +7,7 @@ import {
   StyleSheet,
   PDFViewer,
 } from '@react-pdf/renderer';
-import { useEffect } from 'react';
 import { FormData } from './Resume';
-import { Storage } from 'aws-amplify';
 import EmailIcon from '../resources/email-icon.png';
 import PhoneIcon from '../resources/phone-icon.png';
 
@@ -56,13 +54,6 @@ const MyDocument = ({
   summary,
   experience,
 }: FormData) => {
-  useEffect(() => {
-    const postResult = async () => {
-      await Storage.put('test.txt', 'Hello');
-    };
-    postResult();
-  }, []);
-
   return (
     <PDFViewer style={styles.viewer}>
       <Document>

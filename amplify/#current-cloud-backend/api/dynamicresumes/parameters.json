@@ -1,5 +1,0 @@
-{
-  "AppSyncApiName": "dynamicresumes",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
-}
