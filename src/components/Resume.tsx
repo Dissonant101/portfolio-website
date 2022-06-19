@@ -2,6 +2,10 @@ import { useState, useCallback, ChangeEvent } from 'react';
 import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
 
+interface Experience {
+  experience: string;
+}
+
 export interface FormData {
   firstName: string;
   lastName: string;
@@ -54,6 +58,30 @@ const Resume = () => {
       [event.target.name]: event.target.value,
     });
     debouncer(event, formState);
+  };
+
+  const [experienceList, setExperienceList] = useState<Experience[]>([
+    { experience: '' },
+  ]);
+
+  const handleExperienceAdd = () => {
+    setExperienceList([...experienceList, { experience: '' }]);
+  };
+
+  const handleExperienceRemove = (index: number) => {
+    const list = [...experienceList];
+    list.splice(index, 1);
+    setExperienceList(list);
+  };
+
+  const handleExperienceChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+    const list = [...experienceList];
+    list[index][name as keyof Experience] = value;
+    setExperienceList(list);
   };
 
   return (
@@ -125,16 +153,30 @@ const Resume = () => {
             ></textarea>
           </div>
           <div className="outline rounded-md p-3 mb-5">
-            <label>Experience</label>
-            <br />
-            <textarea
-              className="outline outline-1 rounded-md my-1 px-3 py-1"
-              rows={4}
-              cols={90}
-              name="experience"
-              value={formState.experience}
-              onChange={handleChange}
-            ></textarea>
+            {experienceList.map((singleExperience, index) => (
+              <div key={index} className="experiences">
+                <input
+                  name="experience"
+                  type="text"
+                  className="experience"
+                  value={singleExperience.experience}
+                  onChange={(e) => handleExperienceChange(e, index)}
+                ></input>
+                {experienceList.length - 1 === index && (
+                  <button type="button" onClick={handleExperienceAdd}>
+                    Add Experience
+                  </button>
+                )}
+                {experienceList.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => handleExperienceRemove(index)}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
         </form>
       </div>
