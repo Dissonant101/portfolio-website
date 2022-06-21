@@ -1,10 +1,6 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent, useEffect } from 'react';
 import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
-
-interface Experience {
-  experience: string;
-}
 
 export interface FormData {
   firstName: string;
@@ -12,17 +8,31 @@ export interface FormData {
   email: string;
   phoneNumber: string;
   summary: string;
+  experience: Experience[];
+  reference: Reference[];
+}
+
+interface Experience {
   experience: string;
 }
 
+interface Reference {
+  reference: string;
+}
+
 const Resume = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [formState, setFormState] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
     summary: '',
-    experience: '',
+    experience: [{ experience: '' }],
+    reference: [{ reference: '' }],
   });
 
   const [documentState, setDocumentState] = useState<FormData>({
@@ -31,19 +41,30 @@ const Resume = () => {
     email: '',
     phoneNumber: '',
     summary: '',
-    experience: '',
+    experience: [{ experience: '' }],
+    reference: [{ reference: '' }],
   });
 
   const debouncer = useCallback(
     _debounce(
       (
         event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-        formData: FormData
+        formData: FormData,
+        index?: any
       ) => {
-        setDocumentState({
-          ...formData,
-          [event.target.name]: event.target.value,
-        });
+        if (index === undefined) {
+          setDocumentState({
+            ...formData,
+            [event.target.name]: event.target.value,
+          });
+        } else {
+          const fieldName = event.target.name as keyof FormData;
+          const list = [...(formData[fieldName] as any[])];
+          list[index] = {
+            [fieldName]: event.target.value,
+          };
+          setDocumentState({ ...formData, [event.target.name]: list });
+        }
       },
       1000
     ),
@@ -51,37 +72,36 @@ const Resume = () => {
   );
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    index?: any
   ) => {
-    setFormState({
-      ...formState,
-      [event.target.name]: event.target.value,
-    });
-    debouncer(event, formState);
+    if (index === undefined) {
+      setFormState({
+        ...formState,
+        [event.target.name]: event.target.value,
+      });
+      debouncer(event, formState);
+    } else {
+      const fieldName = event.target.name as keyof FormData;
+      const list = [...(formState[fieldName] as any[])];
+      list[index] = {
+        [fieldName]: event.target.value,
+      };
+      setFormState({ ...formState, [event.target.name]: list });
+      debouncer(event, formState, index);
+    }
   };
 
-  const [experienceList, setExperienceList] = useState<Experience[]>([
-    { experience: '' },
-  ]);
-
-  const handleExperienceAdd = () => {
-    setExperienceList([...experienceList, { experience: '' }]);
+  const handleFieldAdd = (fieldName: keyof FormData) => {
+    const list = [...(formState[fieldName] as any[])];
+    list.push({ [fieldName]: '' });
+    setFormState({ ...formState, [fieldName]: list });
   };
 
-  const handleExperienceRemove = (index: number) => {
-    const list = [...experienceList];
+  const handleFieldRemove = (fieldName: keyof FormData, index: number) => {
+    const list = [...(formState[fieldName] as any[])];
     list.splice(index, 1);
-    setExperienceList(list);
-  };
-
-  const handleExperienceChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { name, value } = e.target;
-    const list = [...experienceList];
-    list[index][name as keyof Experience] = value;
-    setExperienceList(list);
+    setFormState({ ...formState, [fieldName]: list });
   };
 
   return (
@@ -153,28 +173,74 @@ const Resume = () => {
             ></textarea>
           </div>
           <div className="outline rounded-md p-3 mb-5">
-            {experienceList.map((singleExperience, index) => (
+            <label>Experience</label>
+            <br />
+            {formState.experience.map((singleExperience, index) => (
               <div key={index} className="experiences">
-                <input
-                  name="experience"
-                  type="text"
-                  className="experience"
-                  value={singleExperience.experience}
-                  onChange={(e) => handleExperienceChange(e, index)}
-                ></input>
-                {experienceList.length - 1 === index && (
-                  <button type="button" onClick={handleExperienceAdd}>
-                    Add Experience
-                  </button>
-                )}
-                {experienceList.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => handleExperienceRemove(index)}
-                  >
-                    Remove
-                  </button>
-                )}
+                <div>
+                  <input
+                    className="experience outline outline-1 rounded-md my-1 px-3 py-1"
+                    type="text"
+                    name="experience"
+                    value={singleExperience.experience}
+                    onChange={(e) => handleChange(e, index)}
+                  ></input>
+                  {formState.experience.length > 1 && (
+                    <button
+                      className="p-3"
+                      type="button"
+                      onClick={() => handleFieldRemove('experience', index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <div>
+                  {formState.experience.length - 1 === index && (
+                    <button
+                      type="button"
+                      onClick={() => handleFieldAdd('experience')}
+                    >
+                      Add Experience
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="outline rounded-md p-3 mb-5">
+            <label>References</label>
+            <br />
+            {formState.reference.map((singleReference, index) => (
+              <div key={index} className="references">
+                <div>
+                  <input
+                    className="reference outline outline-1 rounded-md my-1 px-3 py-1"
+                    type="text"
+                    name="reference"
+                    value={singleReference.reference}
+                    onChange={(e) => handleChange(e, index)}
+                  ></input>
+                  {formState.reference.length > 1 && (
+                    <button
+                      className="p-3"
+                      type="button"
+                      onClick={() => handleFieldRemove('reference', index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <div>
+                  {formState.reference.length - 1 === index && (
+                    <button
+                      type="button"
+                      onClick={() => handleFieldAdd('reference')}
+                    >
+                      Add Reference
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
