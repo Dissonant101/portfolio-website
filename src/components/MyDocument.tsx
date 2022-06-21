@@ -7,10 +7,18 @@ import {
   StyleSheet,
   PDFViewer,
 } from '@react-pdf/renderer';
-import { useEffect } from 'react';
 import { FormData } from './Resume';
 import EmailIcon from '../resources/email-icon.png';
 import PhoneIcon from '../resources/phone-icon.png';
+const axios = require('axios');
+
+const getStylesheet = async () => {
+  const response = await axios.get(
+    'http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/blue1.json'
+  );
+  console.log(response.data);
+  return await response.data;
+};
 
 const styles = StyleSheet.create({
   viewer: {
@@ -28,17 +36,31 @@ const styles = StyleSheet.create({
     height: '20%',
     padding: 20,
   },
+  name: {
+    fontSize: 30,
+    paddingBottom: 5,
+  },
+  info: {
+    fontSize: 16,
+  },
+  body: {
+    margin: 10,
+    borderBottom: 2,
+    borderBottomColor: 'orange',
+  },
+  bodyTitle: {
+    // something
+  },
   bodySection: {
     color: 'black',
     width: '100%',
-    margin: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',
     flexGrow: 1,
     flexWrap: 'wrap',
-    borderBottom: 2,
-    borderBottomColor: 'orange',
   },
   icon: {
     width: 20,
@@ -54,9 +76,22 @@ const MyDocument = ({
   phoneNumber,
   summary,
   experience,
+  reference,
 }: FormData) => {
-  useEffect(() => {
-    console.log(firstName);
+  const experiences = experience.map((a, index) => {
+    return (
+      <Text key={index} style={{ padding: 6 }}>
+        {experience[index].experience}
+      </Text>
+    );
+  });
+
+  const references = reference.map((a, index) => {
+    return (
+      <Text key={index} style={{ padding: 6 }}>
+        {reference[index].reference}
+      </Text>
+    );
   });
 
   return (
@@ -64,33 +99,37 @@ const MyDocument = ({
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.titleSection}>
-            <Text style={{ fontSize: 30, paddingBottom: 5 }}>
+            <Text style={styles.name}>
               {firstName} {lastName}
             </Text>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.info}>
               <Image style={styles.icon} src={EmailIcon} />
               <Text>{email}</Text>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.info}>
               <Image style={styles.icon} src={PhoneIcon} />
               <Text>{phoneNumber}</Text>
             </View>
           </View>
-          <View style={styles.bodySection}>
-            <View style={{ flex: 1, fontSize: 24 }}>
+          <View style={styles.body}>
+            <View style={styles.bodyTitle}>
               <Text>Professional Summary</Text>
             </View>
-            <View style={{ flex: 3 }}>
-              <Text style={{ padding: 6 }}>{summary}</Text>
+            <View style={styles.bodySection}>
+              <Text>{summary}</Text>
             </View>
           </View>
-          <View style={styles.bodySection}>
-            <View style={{ flex: 1, fontSize: 24 }}>
-              <Text>Experience</Text>
+          <View style={styles.body}>
+            <View style={styles.bodyTitle}>
+              <Text>Past Experience</Text>
             </View>
-            <View style={{ flex: 3 }}>
-              <Text style={{ padding: 6 }}>{experience}</Text>
+            <View style={styles.bodySection}>{experiences}</View>
+          </View>
+          <View style={styles.body}>
+            <View style={styles.bodyTitle}>
+              <Text>References</Text>
             </View>
+            <View style={styles.bodySection}>{references}</View>
           </View>
         </Page>
       </Document>
