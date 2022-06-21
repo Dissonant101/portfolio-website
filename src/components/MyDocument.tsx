@@ -10,6 +10,15 @@ import {
 import { FormData } from './Resume';
 import EmailIcon from '../resources/email-icon.png';
 import PhoneIcon from '../resources/phone-icon.png';
+const axios = require('axios');
+
+const getStylesheet = async () => {
+  const response = await axios.get(
+    'http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/blue1.json'
+  );
+  console.log(response.data);
+  return await response.data;
+};
 
 const styles = StyleSheet.create({
   viewer: {
@@ -112,7 +121,7 @@ const MyDocument = ({
           </View>
           <View style={styles.body}>
             <View style={styles.bodyTitle}>
-              <Text>Experience</Text>
+              <Text>Past Experience</Text>
             </View>
             <View style={styles.bodySection}>{experiences}</View>
           </View>
