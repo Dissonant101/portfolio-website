@@ -3,6 +3,7 @@ import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
 
 export interface FormData {
+  style: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -26,6 +27,7 @@ const Resume = () => {
   }, []);
 
   const [formState, setFormState] = useState<FormData>({
+    style: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -36,6 +38,7 @@ const Resume = () => {
   });
 
   const [documentState, setDocumentState] = useState<FormData>({
+    style: '',
     firstName: '',
     lastName: '',
     email: '',

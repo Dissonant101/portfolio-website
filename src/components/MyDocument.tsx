@@ -1,75 +1,19 @@
+import { useEffect, useState } from 'react';
 import {
   Document,
   Page,
   Text,
   View,
   Image,
-  StyleSheet,
   PDFViewer,
 } from '@react-pdf/renderer';
 import { FormData } from './Resume';
 import EmailIcon from '../resources/email-icon.png';
 import PhoneIcon from '../resources/phone-icon.png';
-const axios = require('axios');
-
-const getStylesheet = async () => {
-  const response = await axios.get(
-    'http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/blue1.json'
-  );
-  console.log(response.data);
-  return await response.data;
-};
-
-const styles = StyleSheet.create({
-  viewer: {
-    width: '100%',
-    height: '100%',
-  },
-  page: {
-    flexDirection: 'column',
-    backgroundColor: '#FFFFFF',
-  },
-  titleSection: {
-    color: 'white',
-    backgroundColor: 'orange',
-    width: '100%',
-    height: '20%',
-    padding: 20,
-  },
-  name: {
-    fontSize: 30,
-    paddingBottom: 5,
-  },
-  info: {
-    fontSize: 16,
-  },
-  body: {
-    margin: 10,
-    borderBottom: 2,
-    borderBottomColor: 'orange',
-  },
-  bodyTitle: {
-    // something
-  },
-  bodySection: {
-    color: 'black',
-    width: '100%',
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 20,
-    paddingRight: 20,
-    flexDirection: 'row',
-    flexGrow: 1,
-    flexWrap: 'wrap',
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    margin: 5,
-  },
-});
+import axios from 'axios';
 
 const MyDocument = ({
+  style,
   firstName,
   lastName,
   email,
@@ -78,6 +22,75 @@ const MyDocument = ({
   experience,
   reference,
 }: FormData) => {
+  const [styles, setStyles] = useState({
+    viewer: {},
+    page: {},
+    titleSection: {},
+    name: {},
+    info: {},
+    body: {},
+    bodyTitle: {},
+    bodySection: {},
+    icon: {},
+  });
+
+  const getStyles = async (name: string) => {
+    const response = await axios.get(
+      'http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/' +
+        name +
+        '.json'
+    );
+    setStyles(response.data);
+  };
+
+  useEffect(() => {
+    // getStyles(style);
+    setStyles({
+      viewer: {
+        width: '100%',
+        height: '100%',
+      },
+      page: {
+        backgroundColor: '#FFFFFF',
+      },
+      titleSection: {
+        color: 'white',
+        backgroundColor: 'orange',
+        width: '100%',
+        height: '20%',
+        padding: 20,
+      },
+      name: {
+        fontSize: 30,
+        paddingBottom: 5,
+      },
+      info: {
+        fontSize: 16,
+      },
+      body: {
+        margin: 10,
+        borderBottom: 2,
+        borderBottomColor: 'orange',
+        flexDirection: 'col',
+        flexGrow: 1,
+      },
+      bodyTitle: {},
+      bodySection: {
+        color: 'black',
+        width: '100%',
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+      },
+      icon: {
+        width: 20,
+        height: 20,
+        margin: 5,
+      },
+    });
+  }, []);
+
   const experiences = experience.map((a, index) => {
     return (
       <Text key={index} style={{ padding: 6 }}>

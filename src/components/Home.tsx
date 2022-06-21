@@ -20,7 +20,7 @@ const Home = () => {
           </div>
           <div className="flex-1">
             <button
-              className="bg-orange-400 hover:bg-orange-500 rounded py-2 px-4"
+              className="bg-orange-400 hover:bg-orange-500 rounded py-2 px-4 text-black"
               type="button"
               onClick={handleClick}
             >
