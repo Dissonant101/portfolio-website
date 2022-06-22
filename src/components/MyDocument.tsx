@@ -13,7 +13,7 @@ import PhoneIcon from '../resources/phone-icon.png';
 import axios from 'axios';
 
 const MyDocument = ({
-  style,
+  styleName,
   firstName,
   lastName,
   email,
@@ -44,52 +44,52 @@ const MyDocument = ({
   };
 
   useEffect(() => {
-    // getStyles(style);
-    setStyles({
-      viewer: {
-        width: '100%',
-        height: '100%',
-      },
-      page: {
-        backgroundColor: '#FFFFFF',
-      },
-      titleSection: {
-        color: 'white',
-        backgroundColor: 'orange',
-        width: '100%',
-        height: '20%',
-        padding: 20,
-      },
-      name: {
-        fontSize: 30,
-        paddingBottom: 5,
-      },
-      info: {
-        fontSize: 16,
-      },
-      body: {
-        margin: 10,
-        borderBottom: 2,
-        borderBottomColor: 'orange',
-        flexDirection: 'col',
-        flexGrow: 1,
-      },
-      bodyTitle: {},
-      bodySection: {
-        color: 'black',
-        width: '100%',
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 20,
-        paddingRight: 20,
-      },
-      icon: {
-        width: 20,
-        height: 20,
-        margin: 5,
-      },
-    });
-  }, []);
+    getStyles(styleName);
+    // setStyles({
+    //   viewer: {
+    //     width: '100%',
+    //     height: '100%',
+    //   },
+    //   page: {
+    //     backgroundColor: '#FFFFFF',
+    //   },
+    //   titleSection: {
+    //     color: 'white',
+    //     backgroundColor: 'orange',
+    //     width: '100%',
+    //     height: '20%',
+    //     padding: 20,
+    //   },
+    //   name: {
+    //     fontSize: 30,
+    //     paddingBottom: 5,
+    //   },
+    //   info: {
+    //     fontSize: 16,
+    //   },
+    //   body: {
+    //     margin: 10,
+    //     borderBottom: 2,
+    //     borderBottomColor: 'orange',
+    //     flexDirection: 'col',
+    //     flexGrow: 1,
+    //   },
+    //   bodyTitle: {},
+    //   bodySection: {
+    //     color: 'black',
+    //     width: '100%',
+    //     paddingTop: 5,
+    //     paddingBottom: 5,
+    //     paddingLeft: 20,
+    //     paddingRight: 20,
+    //   },
+    //   icon: {
+    //     width: 20,
+    //     height: 20,
+    //     margin: 5,
+    //   },
+    // });
+  }, [styleName]);
 
   const experiences = experience.map((a, index) => {
     return (
