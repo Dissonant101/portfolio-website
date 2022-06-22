@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
 
@@ -21,11 +21,15 @@ interface Reference {
   reference: string;
 }
 
+/**
+ * Resume builder page component.
+ */
 const Resume = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Input form state
   const [formState, setFormState] = useState<FormData>({
     styleName: 'orange1',
     firstName: '',
@@ -37,6 +41,7 @@ const Resume = () => {
     reference: [{ reference: '' }],
   });
 
+  // PDF document state
   const [documentState, setDocumentState] = useState<FormData>({
     styleName: 'orange1',
     firstName: '',
@@ -48,6 +53,7 @@ const Resume = () => {
     reference: [{ reference: '' }],
   });
 
+  // Delay between typing and reloading pdf
   const debouncer = useCallback(
     _debounce((event: any, formData: FormData, index?: any) => {
       if (index === undefined) {
@@ -111,7 +117,7 @@ const Resume = () => {
               onChange={handleChange}
             >
               <option value="orange1">Orange 1</option>
-              <option value="blue1">Blue 1</option>
+              <option value="teal1">Teal 1</option>
             </select>
           </div>
           <div className="outline rounded-md p-3 mb-5">

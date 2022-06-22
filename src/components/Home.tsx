@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Home page component.
+ */
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,7 +17,7 @@ const Home = () => {
     <div className="bg-white w-screen h-screen">
       <div className="text-center text-gray-600">
         <div className="flex flex-col justify-evenly">
-          <div className="flex-1 pt-40 pb-5">
+          <div className="flex-1 pt-64 pb-5">
             <h1 className="text-7xl">Dynamic Resumes</h1>
             <h4 className="text-xl">Create resumes from scratch!</h4>
           </div>

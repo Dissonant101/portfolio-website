@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
-function Navbar() {
+/**
+ * Navigation bar component.
+ */
+const Navbar = () => {
   return (
     <div className="navigation w-full font-sans text-xl z-10 navbar-bg text-white">
       <nav className="navbar navbar-expand navbar-dark bg-dark w-full">
@@ -32,6 +35,6 @@ function Navbar() {
       </nav>
     </div>
   );
-}
+};
 
 export default Navbar;
