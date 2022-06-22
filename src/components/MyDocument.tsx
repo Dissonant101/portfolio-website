@@ -39,10 +39,9 @@ const MyDocument = ({
 
   // Make API call to backend
   const getStyles = async (name: string) => {
+    const corsProxy = 'https://api.codetabs.com/v1/proxy/?quest=';
     const response = await axios.get(
-      'http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/' +
-        name +
-        '.json'
+      `${corsProxy}http://ec2-3-17-146-230.us-east-2.compute.amazonaws.com/api/stylesheet/${name}.json`
     );
     setStyles(response.data);
   };
