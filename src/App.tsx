@@ -2,7 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navbar, Home, About, Resume } from './components';
 import './App.css';
 
-function App() {
+/**
+ * App routes.
+ */
+const App = () => {
   return (
     <Router>
       <Navbar />
@@ -13,6 +16,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

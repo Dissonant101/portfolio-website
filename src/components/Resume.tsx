@@ -1,8 +1,9 @@
-import { useState, useCallback, ChangeEvent, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import _debounce from 'lodash/debounce';
 import MyDocument from './MyDocument';
 
 export interface FormData {
+  styleName: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -20,12 +21,17 @@ interface Reference {
   reference: string;
 }
 
+/**
+ * Resume builder page component.
+ */
 const Resume = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Input form state
   const [formState, setFormState] = useState<FormData>({
+    styleName: 'orange1',
     firstName: '',
     lastName: '',
     email: '',
@@ -35,7 +41,9 @@ const Resume = () => {
     reference: [{ reference: '' }],
   });
 
+  // PDF document state
   const [documentState, setDocumentState] = useState<FormData>({
+    styleName: 'orange1',
     firstName: '',
     lastName: '',
     email: '',
@@ -45,36 +53,27 @@ const Resume = () => {
     reference: [{ reference: '' }],
   });
 
+  // Delay between typing and reloading pdf
   const debouncer = useCallback(
-    _debounce(
-      (
-        event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-        formData: FormData,
-        index?: any
-      ) => {
-        if (index === undefined) {
-          setDocumentState({
-            ...formData,
-            [event.target.name]: event.target.value,
-          });
-        } else {
-          const fieldName = event.target.name as keyof FormData;
-          const list = [...(formData[fieldName] as any[])];
-          list[index] = {
-            [fieldName]: event.target.value,
-          };
-          setDocumentState({ ...formData, [event.target.name]: list });
-        }
-      },
-      1000
-    ),
+    _debounce((event: any, formData: FormData, index?: any) => {
+      if (index === undefined) {
+        setDocumentState({
+          ...formData,
+          [event.target.name]: event.target.value,
+        });
+      } else {
+        const fieldName = event.target.name as keyof FormData;
+        const list = [...(formData[fieldName] as any[])];
+        list[index] = {
+          [fieldName]: event.target.value,
+        };
+        setDocumentState({ ...formData, [event.target.name]: list });
+      }
+    }, 1000),
     []
   );
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-    index?: any
-  ) => {
+  const handleChange = (event: any, index?: any) => {
     if (index === undefined) {
       setFormState({
         ...formState,
@@ -109,6 +108,18 @@ const Resume = () => {
       <div className="flex-1 p-5">
         <div className="pb-4 text-xl text-left">Resume Builder</div>
         <form>
+          <div className="outline rounded-md p-3 mb-5">
+            <label>Style</label>
+            <select
+              className="outline outline-1 rounded-md my-1 px-5 py-1 w-full"
+              name="styleName"
+              defaultValue={'orange1'}
+              onChange={handleChange}
+            >
+              <option value="orange1">Orange 1</option>
+              <option value="teal1">Teal 1</option>
+            </select>
+          </div>
           <div className="outline rounded-md p-3 mb-5">
             <div className="flex">
               <div className="flex-1">
